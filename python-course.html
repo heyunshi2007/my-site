@@ -57,8 +57,10 @@
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#home" class="hover:text-primary transition-colors duration-300">首页</a>
-                <a href="#syntax" class="hover:text-primary transition-colors duration-300">基础语法</a>
-                <a href="#analysis" class="hover:text-primary transition-colors duration-300">数据分析</a>
+                <a href="#core" class="hover:text-primary transition-colors duration-300">Python核心</a>
+                <a href="#data" class="hover:text-primary transition-colors duration-300">数据处理</a>
+                <a href="#ai" class="hover:text-primary transition-colors duration-300">AI入门</a>
+                <a href="#path" class="hover:text-primary transition-colors duration-300">学习路径</a>
                 <a href="index.html" class="hover:text-primary transition-colors duration-300 flex items-center">
                     <i class="fa fa-home mr-2"></i>返回主页
                 </a>
@@ -71,8 +73,10 @@
         <div class="md:hidden hidden bg-dark/95 border-t border-white/10" id="mobileMenu">
             <div class="container mx-auto px-4 py-4 space-y-4">
                 <a href="#home" class="block hover:text-primary transition-colors duration-300">首页</a>
-                <a href="#syntax" class="block hover:text-primary transition-colors duration-300">基础语法</a>
-                <a href="#analysis" class="block hover:text-primary transition-colors duration-300">数据分析</a>
+                <a href="#core" class="block hover:text-primary transition-colors duration-300">Python核心</a>
+                <a href="#data" class="block hover:text-primary transition-colors duration-300">数据处理</a>
+                <a href="#ai" class="block hover:text-primary transition-colors duration-300">AI入门</a>
+                <a href="#path" class="block hover:text-primary transition-colors duration-300">学习路径</a>
                 <a href="index.html" class="block hover:text-primary transition-colors duration-300 flex items-center">
                     <i class="fa fa-home mr-2"></i>返回主页
                 </a>
@@ -89,187 +93,527 @@
                     <span class="text-gradient bg-gradient-to-r from-primary to-secondary">Python 基础课程</span>
                 </h1>
                 <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                    从零开始学习 Python 编程，掌握数据分析的基础技能
+                    基于商务数据分析专业背景，聚焦AI与数据分析的交集，高效学习最必要的内容
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#syntax" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 inline-block">
+                    <a href="#core" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 inline-block">
                         开始学习
                     </a>
-                    <a href="#analysis" class="border border-primary text-primary px-6 py-3 rounded-full hover:bg-primary/10 transition-all duration-300 inline-block">
-                        查看数据分析
+                    <a href="#path" class="border border-primary text-primary px-6 py-3 rounded-full hover:bg-primary/10 transition-all duration-300 inline-block">
+                        查看学习路径
                     </a>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="bg-dark/50 border border-white/10 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4 text-primary">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">高效学习</h3>
+                        <p class="text-gray-400">只学最必要、最高频使用的内容</p>
+                    </div>
+                    <div class="bg-dark/50 border border-white/10 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4 text-secondary">
+                            <i class="fa fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">项目驱动</h3>
+                        <p class="text-gray-400">通过实战快速验证学习效果</p>
+                    </div>
+                    <div class="bg-dark/50 border border-white/10 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4 text-accent">
+                            <i class="fa fa-lightbulb-o"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">AI融合</h3>
+                        <p class="text-gray-400">聚焦AI与数据分析的最大公约数</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Python 基础语法 -->
-    <section id="syntax" class="py-20 relative bg-dark/50">
+    <!-- Python 语言核心 -->
+    <section id="core" class="py-20 relative bg-dark/50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">Python 基础语法</span>
+                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">Python 语言核心</span>
                 </h2>
                 <div class="w-20 h-1 bg-primary mx-auto"></div>
                 <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
-                    学习 Python 的基本语法、数据类型、控制流和函数等核心概念
+                    1-2周快速通关，掌握基础语法和程序逻辑
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-code text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">变量和数据类型</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">基础语法</h3>
                     <p class="text-gray-300 mb-6">
-                        学习如何声明变量和使用 Python 的基本数据类型
+                        掌握Python的基本语法和数据类型，为后续学习打下基础
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>整数和浮点数
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">变量和数据类型</h4>
+                                <p class="text-sm">整数、字符串、列表、字典、元组、集合</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>字符串操作
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>列表和字典
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">运算符</h4>
+                                <p class="text-sm">算术、比较、逻辑运算符</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-primary hover:text-secondary transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
                 </div>
                 <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-sitemap text-secondary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300">条件语句和循环</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300">程序控制</h3>
                     <p class="text-gray-300 mb-6">
-                        掌握 if 语句、for 循环和 while 循环的使用
+                        掌握条件语句和循环，实现程序的流程控制
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>if-else 语句
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">条件语句</h4>
+                                <p class="text-sm">if-elif-else 语句</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>for 循环
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>while 循环
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">循环</h4>
+                                <p class="text-sm">for 循环和 while 循环</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-secondary hover:text-accent transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
                 </div>
                 <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-cubes text-accent text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-accent transition-colors duration-300">函数定义和调用</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-accent transition-colors duration-300">函数</h3>
                     <p class="text-gray-300 mb-6">
-                        学习如何定义和使用函数，以及参数传递和返回值
+                        学习如何定义和使用函数，组织代码结构
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>函数定义
+                            <i class="fa fa-check text-accent mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">函数定义</h4>
+                                <p class="text-sm">def 语句和函数结构</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>参数和返回值
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>作用域
+                            <i class="fa fa-check text-accent mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">参数和返回值</h4>
+                                <p class="text-sm">位置参数、默认参数、返回值</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-accent hover:text-primary transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
                 </div>
+                <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-object-group text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">面向对象编程基础</h3>
+                    <p class="text-gray-300 mb-6">
+                        理解类和对象的概念，为使用AI库做准备
+                    </p>
+                    <ul class="text-gray-400 space-y-3 mb-6">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">类和对象</h4>
+                                <p class="text-sm">类的定义和对象的创建</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">属性和方法</h4>
+                                <p class="text-sm">实例属性和方法</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 bg-dark/50 border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4 text-primary">学习建议</h3>
+                <p class="text-gray-300 mb-6">
+                    此阶段切忌深究复杂语法技巧。可通过在线交互式教程（如Codecademy）或国内B站上的"Python零基础"速成课程快速完成。重点是理解基本概念和逻辑，为后续的数据分析学习做好准备。
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- 数据分析基础 -->
-    <section id="analysis" class="py-20 relative">
+    <!-- 数据处理三件套 -->
+    <section id="data" class="py-20 relative">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">数据分析基础</span>
+                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">数据处理 "三件套"</span>
                 </h2>
                 <div class="w-20 h-1 bg-primary mx-auto"></div>
                 <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
-                    学习使用 Python 进行数据处理和分析的基本方法
+                    3-4周重点学习，掌握数据的读取、清洗、分析和可视化
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div class="bg-dark/50 border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-table text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">NumPy 数组操作</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">NumPy</h3>
                     <p class="text-gray-300 mb-6">
-                        学习 NumPy 数组的创建、操作和基本运算
+                        掌握数组（ndarray）的创建、索引、切片和基本运算，是所有科学计算库的底层基础
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>数组创建
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">数组创建</h4>
+                                <p class="text-sm">np.array, np.zeros, np.ones 等</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>数组索引和切片
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">索引和切片</h4>
+                                <p class="text-sm">一维和多维数组的访问</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-primary mr-2"></i>数组运算
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">基本运算</h4>
+                                <p class="text-sm">数组加减乘除、矩阵乘法</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-primary hover:text-secondary transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
                 </div>
                 <div class="bg-dark/50 border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fa fa-database text-secondary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300">Pandas 数据处理</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300">Pandas</h3>
                     <p class="text-gray-300 mb-6">
-                        掌握 Pandas Series 和 DataFrame 的使用方法
+                        你的核心武器，必须熟练掌握DataFrame和Series，能进行数据加载、清洗、筛选和聚合
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>Series 和 DataFrame
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">数据结构</h4>
+                                <p class="text-sm">Series 和 DataFrame</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>数据读取和写入
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">数据读写</h4>
+                                <p class="text-sm">读取 CSV/Excel 文件</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-secondary mr-2"></i>数据选择和过滤
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">数据操作</h4>
+                                <p class="text-sm">数据清洗、筛选、分组聚合</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-secondary hover:text-accent transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
                 </div>
                 <div class="bg-dark/50 border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
                     <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-6">
-                        <i class="fa fa-wrench text-accent text-2xl"></i>
+                        <i class="fa fa-line-chart text-accent text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-accent transition-colors duration-300">数据清洗和转换</h3>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-accent transition-colors duration-300">Matplotlib / Seaborn</h3>
                     <p class="text-gray-300 mb-6">
-                        学习如何处理缺失值、异常值和数据转换
+                        掌握绘制各种图表的基本方法，数据可视化是分析结论呈现的关键
                     </p>
-                    <ul class="text-gray-400 space-y-2 mb-6">
+                    <ul class="text-gray-400 space-y-3 mb-6">
                         <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>处理缺失值
+                            <i class="fa fa-check text-accent mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">基本图表</h4>
+                                <p class="text-sm">折线图、散点图、柱状图</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>数据类型转换
+                            <i class="fa fa-check text-accent mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">图表定制</h4>
+                                <p class="text-sm">标题、标签、图例、样式</p>
+                            </div>
                         </li>
                         <li class="flex items-center">
-                            <i class="fa fa-check text-accent mr-2"></i>数据合并和分组
+                            <i class="fa fa-check text-accent mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">Seaborn</h4>
+                                <p class="text-sm">高级统计图表</p>
+                            </div>
                         </li>
                     </ul>
-                    <button class="text-accent hover:text-primary transition-colors duration-300 flex items-center">
-                        开始学习 <i class="fa fa-arrow-right ml-2"></i>
-                    </button>
+                </div>
+            </div>
+            <div class="mt-12 bg-dark/50 border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4 text-primary">学习建议</h3>
+                <p class="text-gray-300 mb-6">
+                    找一份真实数据集（如Kaggle上的"泰坦尼克号生存预测"或"电影评分数据"），从头到尾完成一次数据分析：用Pandas加载和清洗，用NumPy进行必要计算，用Matplotlib画出各种图表探索规律。这是你专业能力和AI项目的基石，约80%的工作集中于此。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI/机器学习入门 -->
+    <section id="ai" class="py-20 relative bg-dark/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">AI/机器学习入门</span>
+                </h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+                <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
+                    2-3周学习，能调用成熟库实现经典机器学习算法，理解AI建模全流程
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-brain text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">Scikit-learn</h3>
+                    <p class="text-gray-300 mb-6">
+                        机器学习首选入门库，学会用它调用模型，理解建模全流程
+                    </p>
+                    <ul class="text-gray-400 space-y-3 mb-6">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">建模流程</h4>
+                                <p class="text-sm">数据预处理 → 划分训练集/测试集 → 选择模型 → 训练 → 预测 → 评估</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">常用模型</h4>
+                                <p class="text-sm">线性回归、逻辑回归、决策树、随机森林</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-primary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">评估指标</h4>
+                                <p class="text-sm">准确率、精确率、召回率、均方误差</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-dark border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-microchip text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors duration-300">深度学习框架</h3>
+                    <p class="text-gray-300 mb-6">
+                        了解TensorFlow/Keras或PyTorch其中之一，构建简单的神经网络
+                    </p>
+                    <ul class="text-gray-400 space-y-3 mb-6">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">基础概念</h4>
+                                <p class="text-sm">神经网络结构、激活函数、损失函数</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">实战项目</h4>
+                                <p class="text-sm">MNIST手写数字识别</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-secondary mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-300">模型训练</h4>
+                                <p class="text-sm">批次训练、学习率、模型保存</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 bg-dark/50 border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4 text-primary">学习建议</h3>
+                <p class="text-gray-300 mb-6">
+                    你不需要手写算法，但需要学会用Scikit-learn调用模型。使用之前清洗好的数据，尝试建立一个预测模型（如泰坦尼克号数据中预测乘客生存）。有余力可尝试用Keras复现一个手写数字识别网络，这是深度学习的"Hello World"。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学习路径规划 -->
+    <section id="path" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">高效学习路径规划</span>
+                </h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+                <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
+                    6-8周从入门到实践，遵循"最小必要知识 → 实战验证"的敏捷学习循环
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <!-- 时间线 -->
+                <div class="relative">
+                    <!-- 时间线轴 -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                    
+                    <!-- 第1-2周 -->
+                    <div class="mb-16 relative">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0">
+                                <h3 class="text-2xl font-bold text-primary mb-4">第1-2周</h3>
+                                <h4 class="text-xl font-semibold mb-2">Python语言核心</h4>
+                                <p class="text-gray-300 mb-4">
+                                    突击完成Python语言核心知识，同时安装Anaconda，它集成了Python和大部分你需要的科学计算库。
+                                </p>
+                                <ul class="text-gray-400 space-y-2">
+                                    <li class="flex md:justify-end items-center">
+                                        <span>基础语法和数据类型</span>
+                                        <i class="fa fa-check text-primary ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                    <li class="flex md:justify-end items-center">
+                                        <span>程序控制和函数</span>
+                                        <i class="fa fa-check text-primary ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                    <li class="flex md:justify-end items-center">
+                                        <span>面向对象编程基础</span>
+                                        <i class="fa fa-check text-primary ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10">
+                                <span class="font-bold">1</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第3-5周 -->
+                    <div class="mb-16 relative">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-secondary flex items-center justify-center z-10">
+                                <span class="font-bold">2</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0">
+                                <h3 class="text-2xl font-bold text-secondary mb-4">第3-5周</h3>
+                                <h4 class="text-xl font-semibold mb-2">数据处理"三件套"</h4>
+                                <p class="text-gray-300 mb-4">
+                                    主攻数据处理"三件套"，找一份真实数据集，从头到尾完成一次数据分析。
+                                </p>
+                                <ul class="text-gray-400 space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fa fa-check text-secondary mr-2"></i>
+                                        <span>NumPy 数组操作</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa fa-check text-secondary mr-2"></i>
+                                        <span>Pandas 数据处理</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa fa-check text-secondary mr-2"></i>
+                                        <span>Matplotlib/Seaborn 数据可视化</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第6-8周 -->
+                    <div class="relative">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0">
+                                <h3 class="text-2xl font-bold text-accent mb-4">第6-8周</h3>
+                                <h4 class="text-xl font-semibold mb-2">AI建模实战</h4>
+                                <p class="text-gray-300 mb-4">
+                                    进入AI建模实战，使用Scikit-learn建立预测模型，有余力可尝试深度学习。
+                                </p>
+                                <ul class="text-gray-400 space-y-2">
+                                    <li class="flex md:justify-end items-center">
+                                        <span>Scikit-learn 建模流程</span>
+                                        <i class="fa fa-check text-accent ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                    <li class="flex md:justify-end items-center">
+                                        <span>模型评估和调优</span>
+                                        <i class="fa fa-check text-accent ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                    <li class="flex md:justify-end items-center">
+                                        <span>深度学习初探</span>
+                                        <i class="fa fa-check text-accent ml-2 md:ml-0 md:mr-2"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-accent flex items-center justify-center z-10">
+                                <span class="font-bold">3</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学习方法 -->
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="bg-dark/50 border border-white/10 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">学习方法</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-code text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">边学边练</h4>
+                                <p class="text-gray-300">每学一个知识点，立刻在代码编辑器中敲一遍。每个阶段都必须有一个像样的数据分析或建模小项目作为产出。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-book text-secondary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">资源选择</h4>
+                                <p class="text-gray-300">优先选择项目实战类的教程或书籍。例如《Python编程：从入门到实践》或《机器学习实战》。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-calculator text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">数学基础</h4>
+                                <p class="text-gray-300">对于入门阶段，无需恐惧数学。当你在使用线性回归时，再去理解"梯度下降"；在使用概率模型时，再去回顾"条件概率"。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-exclamation-triangle text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">避开时间陷阱</h4>
+                                <p class="text-gray-300">不要先学Python全栈，不要陷入底层理论，不要囤积资料。选定1-2套优质教程，吃透它。</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -284,8 +628,10 @@
                 </div>
                 <div class="flex space-x-6">
                     <a href="#home" class="text-gray-400 hover:text-primary transition-colors duration-300">首页</a>
-                    <a href="#syntax" class="text-gray-400 hover:text-primary transition-colors duration-300">基础语法</a>
-                    <a href="#analysis" class="text-gray-400 hover:text-primary transition-colors duration-300">数据分析</a>
+                    <a href="#core" class="text-gray-400 hover:text-primary transition-colors duration-300">Python核心</a>
+                    <a href="#data" class="text-gray-400 hover:text-primary transition-colors duration-300">数据处理</a>
+                    <a href="#ai" class="text-gray-400 hover:text-primary transition-colors duration-300">AI入门</a>
+                    <a href="#path" class="text-gray-400 hover:text-primary transition-colors duration-300">学习路径</a>
                     <a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center">
                         <i class="fa fa-home mr-1"></i>返回主页
                     </a>
