@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 项目实战 - 学习单元</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#06b6d4',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        dark: '#0f172a',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, var(--tw-gradient-stops));
+            }
+            .glass {
+                backdrop-filter: blur(10px);
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            .neon {
+                box-shadow: 0 0 10px var(--tw-shadow-color), 0 0 20px var(--tw-shadow-color), 0 0 30px var(--tw-shadow-color);
+            }
+            .code-block {
+                background-color: rgba(15, 23, 42, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                overflow-x: auto;
+            }
+            .code-line {
+                font-family: 'Courier New', monospace;
+                line-height: 1.5;
+            }
+            .note-box {
+                background-color: rgba(139, 92, 246, 0.1);
+                border-left: 4px solid #8b5cf6;
+                padding: 1rem;
+                border-radius: 0 0.5rem 0.5rem 0;
+            }
+            .warning-box {
+                background-color: rgba(236, 72, 153, 0.1);
+                border-left: 4px solid #ec4899;
+                padding: 1rem;
+                border-radius: 0 0.5rem 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light font-inter min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gradient bg-gradient-to-r from-primary to-secondary">
+                <a href="index.html" class="text-white">个人主页</a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="python-course.html" class="hover:text-primary transition-colors duration-300">课程首页</a>
+                <a href="python-core.html" class="hover:text-primary transition-colors duration-300">基础语法</a>
+                <a href="python-data.html" class="hover:text-primary transition-colors duration-300">数据处理</a>
+                <a href="python-ai.html" class="hover:text-primary transition-colors duration-300">AI入门</a>
+                <a href="#projects" class="hover:text-primary transition-colors duration-300">项目实战</a>
+            </div>
+            <button class="md:hidden text-2xl" id="mobileMenuBtn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-dark/95 border-t border-white/10" id="mobileMenu">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="python-course.html" class="block hover:text-primary transition-colors duration-300">课程首页</a>
+                <a href="python-core.html" class="block hover:text-primary transition-colors duration-300">基础语法</a>
+                <a href="python-data.html" class="block hover:text-primary transition-colors duration-300">数据处理</a>
+                <a href="python-ai.html" class="block hover:text-primary transition-colors duration-300">AI入门</a>
+                <a href="#projects" class="block hover:text-primary transition-colors duration-300">项目实战</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="min-h-[40vh] flex items-center justify-center relative overflow-hidden py-20 pt-32">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark to-secondary/20"></div>
+        <div class="container mx-auto px-4 z-10">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="text-gradient bg-gradient-to-r from-primary to-secondary">Python 项目实战</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    通过实际项目综合运用所学知识，巩固和提升你的 Python 技能
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 inline-block">
+                        开始学习
+                    </a>
+                    <a href="python-course.html" class="border border-primary text-primary px-6 py-3 rounded-full hover:bg-primary/10 transition-all duration-300 inline-block">
+                        返回课程首页
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目实战 -->
+    <section id="projects" class="py-20 relative bg-dark/50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-primary">项目实战</h2>
+                <p class="text-gray-300 mb-8">
+                    以下是几个综合项目，帮助你巩固所学的 Python、数据处理和 AI 知识：
+                </p>
+
+                <!-- 项目 1：数据分析项目 -->
+                <div class="bg-dark border border-white/10 rounded-2xl p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-4 text-secondary">项目 1：电商销售数据分析</h3>
+                    <p class="text-gray-300 mb-6">
+                        分析电商平台的销售数据，了解销售趋势、热门产品和客户行为。
+                    </p>
+                    <div class="code-block mb-6">
+                        <pre class="code-line text-gray-300"># 电商销售数据分析项目
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 设置样式
+sns.set(style="whitegrid")
+
+# 1. 生成模拟数据
+np.random.seed(42)
+dates = pd.date_range('2023-01-01', '2023-12-31', freq='D')
+products = ['Product A', 'Product B', 'Product C', 'Product D', 'Product E']
+categories = ['Electronics', 'Clothing', 'Home', 'Beauty', 'Sports']
+
+# 生成销售数据
+data = []
+for date in dates:
+    for i, product in enumerate(products):
+        sales = np.random.randint(10, 100)
+        revenue = sales * np.random.uniform(10, 100)
+        category = categories[i % len(categories)]
+        data.append([date, product, category, sales, revenue])
+
+# 创建 DataFrame
+df = pd.DataFrame(data, columns=['date', 'product', 'category', 'sales', 'revenue'])
+print("数据前 5 行:")
+print(df.head())
+print("\n数据形状:", df.shape)
+
+# 2. 数据预处理
+# 提取月份和季度
+df['month'] = df['date'].dt.month
+df['quarter'] = df['date'].dt.quarter
+
+# 3. 数据分析
+# 月度销售趋势
+monthly_sales = df.groupby('month')[['sales', 'revenue']].sum().reset_index()
+print("\n月度销售数据:")
+print(monthly_sales)
+
+# 产品销售情况
+product_sales = df.groupby('product')[['sales', 'revenue']].sum().reset_index()
+product_sales = product_sales.sort_values('revenue', ascending=False)
+print("\n产品销售排名:")
+print(product_sales)
+
+# 类别销售情况
+category_sales = df.groupby('category')[['sales', 'revenue']].sum().reset_index()
+print("\n类别销售情况:")
+print(category_sales)
+
+# 4. 数据可视化
+# 月度销售趋势
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+sns.lineplot(x='month', y='sales', data=monthly_sales, marker='o')
+plt.title('月度销售数量趋势')
+plt.xlabel('月份')
+plt.ylabel('销售数量')
+
+plt.subplot(1, 2, 2)
+sns.lineplot(x='month', y='revenue', data=monthly_sales, marker='o', color='green')
+plt.title('月度销售收入趋势')
+plt.xlabel('月份')
+plt.ylabel('销售收入')
+plt.tight_layout()
+# plt.show()
+
+# 产品销售对比
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+sns.barplot(x='product', y='sales', data=product_sales)
+plt.title('各产品销售数量')
+plt.xlabel('产品')
+plt.ylabel('销售数量')
+plt.xticks(rotation=45)
+
+plt.subplot(1, 2, 2)
+sns.barplot(x='product', y='revenue', data=product_sales, color='green')
+plt.title('各产品销售收入')
+plt.xlabel('产品')
+plt.ylabel('销售收入')
+plt.xticks(rotation=45)
+plt.tight_layout()
+# plt.show()
+
+# 类别销售占比
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.pie(category_sales['sales'], labels=category_sales['category'], autopct='%1.1f%%')
+plt.title('各类别销售数量占比')
+
+plt.subplot(1, 2, 2)
+plt.pie(category_sales['revenue'], labels=category_sales['category'], autopct='%1.1f%%')
+plt.title('各类别销售收入占比')
+plt.tight_layout()
+# plt.show()
+
+# 5. 结论和建议
+print("\n=== 分析结论 ===")
+print(f"1. 最畅销的产品是: {product_sales.iloc[0]['product']}")
+print(f"2. 贡献收入最多的产品是: {product_sales.iloc[0]['product']}")
+print(f"3. 最畅销的类别是: {category_sales.sort_values('sales', ascending=False).iloc[0]['category']}")
+print(f"4. 贡献收入最多的类别是: {category_sales.sort_values('revenue', ascending=False).iloc[0]['category']}")
+print("5. 销售高峰期出现在第 {} 季度".format(monthly_sales.groupby('quarter')['sales'].sum().idxmax()))
+
+print("\n=== 业务建议 ===")
+print("1. 针对畅销产品和类别，可考虑增加库存和促销活动")
+print("2. 对于销售表现不佳的产品，可考虑优化营销策略或调整价格")
+print("3. 在销售高峰期前做好库存准备")
+print("4. 进一步分析客户购买行为，优化产品推荐策略")</pre>
+                    </div>
+                    <div class="note-box">
+                        <p class="text-gray-300">
+                            <strong class="text-secondary">提示：</strong> 你可以使用真实的电商销售数据来进行分析，例如从 Kaggle 上下载公开数据集。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 项目 2：机器学习项目 -->
+                <div class="bg-dark border border-white/10 rounded-2xl p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-4 text-secondary">项目 2：房价预测</h3>
+                    <p class="text-gray-300 mb-6">
+                        使用机器学习模型预测房价，基于房屋的各种特征。
+                    </p>
+                    <div class="code-block mb-6">
+                        <pre class="code-line text-gray-300"># 房价预测项目
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+
+# 设置样式
+sns.set(style="whitegrid")
+
+# 1. 生成模拟数据
+np.random.seed(42)
+n_samples = 1000
+
+# 特征
+area = np.random.randint(500, 3000, n_samples)  # 面积（平方英尺）
+bedrooms = np.random.randint(1, 6, n_samples)  # 卧室数量
+bathrooms = np.random.randint(1, 5, n_samples)  # 浴室数量
+year_built = np.random.randint(1950, 2023, n_samples)  # 建造年份
+garage = np.random.randint(0, 4, n_samples)  # 车库数量
+
+# 目标变量：房价（基于特征生成，添加一些噪声）
+price = (area * 100 + 
+         bedrooms * 50000 + 
+         bathrooms * 30000 + 
+         (2023 - year_built) * 1000 + 
+         garage * 20000 + 
+         np.random.normal(0, 50000, n_samples))
+
+# 创建 DataFrame
+df = pd.DataFrame({
+    'area': area,
+    'bedrooms': bedrooms,
+    'bathrooms': bathrooms,
+    'year_built': year_built,
+    'garage': garage,
+    'price': price
+})
+
+print("数据前 5 行:")
+print(df.head())
+print("\n数据形状:", df.shape)
+
+# 2. 数据探索
+# 相关性分析
+corr = df.corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.title('特征相关性热力图')
+# plt.show()
+
+# 特征与目标变量的关系
+plt.figure(figsize=(15, 10))
+features = ['area', 'bedrooms', 'bathrooms', 'year_built', 'garage']
+for i, feature in enumerate(features, 1):
+    plt.subplot(2, 3, i)
+    sns.scatterplot(x=feature, y='price', data=df)
+    plt.title(f'{feature} vs price')
+plt.tight_layout()
+# plt.show()
+
+# 3. 数据预处理
+# 划分特征和目标变量
+X = df.drop('price', axis=1)
+y = df['price']
+
+# 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print("\n训练集大小:", X_train.shape)
+print("测试集大小:", X_test.shape)
+
+# 特征缩放
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 4. 模型训练和评估
+models = {
+    '线性回归': LinearRegression(),
+    '岭回归': Ridge(),
+    'LASSO回归': Lasso(),
+    '随机森林': RandomForestRegressor(n_estimators=100, random_state=42)
+}
+
+results = {}
+for name, model in models.items():
+    # 训练模型
+    model.fit(X_train_scaled, y_train)
+    
+    # 预测
+    y_pred = model.predict(X_test_scaled)
+    
+    # 评估
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    r2 = r2_score(y_test, y_pred)
+    
+    results[name] = {
+        'MSE': mse,
+        'RMSE': rmse,
+        'R²': r2
+    }
+    
+    print(f"\n{name} 模型评估:")
+    print(f"MSE: {mse:.2f}")
+    print(f"RMSE: {rmse:.2f}")
+    print(f"R²: {r2:.2f}")
+
+# 5. 模型比较
+results_df = pd.DataFrame(results).T
+print("\n模型性能比较:")
+print(results_df)
+
+# 可视化模型性能
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+sns.barplot(x=results_df.index, y='RMSE', data=results_df)
+plt.title('各模型 RMSE 比较')
+plt.ylabel('RMSE')
+
+plt.subplot(1, 2, 2)
+sns.barplot(x=results_df.index, y='R²', data=results_df)
+plt.title('各模型 R² 比较')
+plt.ylabel('R²')
+plt.tight_layout()
+# plt.show()
+
+# 6. 特征重要性（仅适用于随机森林）
+if '随机森林' in models:
+    rf_model = models['随机森林']
+    feature_importance = pd.DataFrame({
+        'feature': X.columns,
+        'importance': rf_model.feature_importances_
+    }).sort_values('importance', ascending=False)
+    
+    print("\n特征重要性:")
+    print(feature_importance)
+    
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='importance', y='feature', data=feature_importance)
+    plt.title('随机森林特征重要性')
+    # plt.show()
+
+# 7. 模型应用
+# 使用最佳模型进行预测
+best_model_name = results_df['R²'].idxmax()
+best_model = models[best_model_name]
+print(f"\n最佳模型: {best_model_name}")
+
+# 预测新数据
+new_data = np.array([[2000, 3, 2, 2010, 2]])  # 面积2000平方英尺，3卧室，2浴室，2010年建造，2车库
+new_data_scaled = scaler.transform(new_data)
+predicted_price = best_model.predict(new_data_scaled)
+print(f"\n新房屋预测价格: ${predicted_price[0]:,.2f}")</pre>
+                    </div>
+                    <div class="note-box">
+                        <p class="text-gray-300">
+                            <strong class="text-secondary">提示：</strong> 你可以使用真实的房价数据集，例如 Kaggle 上的 Boston Housing 数据集或 Ames Housing 数据集。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 项目 3：Web 应用项目 -->
+                <div class="bg-dark border border-white/10 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-secondary">项目 3：简易天气应用</h3>
+                    <p class="text-gray-300 mb-6">
+                        创建一个简易的天气应用，使用 Python 和 Flask 框架，调用天气 API 获取天气数据。
+                    </p>
+                    <div class="code-block mb-6">
+                        <pre class="code-line text-gray-300"># 简易天气应用
+# 注：这是一个 Flask 应用，需要安装 Flask 和 requests 库
+
+"""
+安装依赖：
+pip install flask requests
+
+运行应用：
+python app.py
+
+然后在浏览器中访问：http://localhost:5000
+"""
+
+from flask import Flask, render_template, request
+import requests
+
+app = Flask(__name__)
+
+# 替换为你的 OpenWeatherMap API 密钥
+API_KEY = 'YOUR_API_KEY'
+BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    weather_data = None
+    error = None
+    
+    if request.method == 'POST':
+        city = request.form.get('city')
+        if city:
+            try:
+                # 构建 API 请求 URL
+                params = {
+                    'q': city,
+                    'appid': API_KEY,
+                    'units': 'metric',  # 使用摄氏度
+                    'lang': 'zh_cn'  # 使用中文
+                }
+                
+                # 发送 API 请求
+                response = requests.get(BASE_URL, params=params)
+                response.raise_for_status()  # 检查请求是否成功
+                
+                # 解析响应数据
+                data = response.json()
+                
+                # 提取需要的信息
+                weather_data = {
+                    'city': data['name'],
+                    'country': data['sys']['country'],
+                    'temperature': data['main']['temp'],
+                    'humidity': data['main']['humidity'],
+                    'wind_speed': data['wind']['speed'],
+                    'description': data['weather'][0]['description'],
+                    'icon': data['weather'][0]['icon']
+                }
+                
+            except Exception as e:
+                error = f"获取天气数据失败: {str(e)}"
+        else:
+            error = "请输入城市名称"
+    
+    return render_template('index.html', weather_data=weather_data, error=error)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+"""
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易天气应用</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">简易天气应用</h1>
+        
+        <form method="POST" class="mb-6">
+            <div class="flex">
+                <input type="text" name="city" placeholder="输入城市名称" 
+                       class="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition-colors">
+                    查询
+                </button>
+            </div>
+        </form>
+        
+        {% if error %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        {% if weather_data %}
+            <div class="bg-blue-50 rounded-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold">{{ weather_data.city }}, {{ weather_data.country }}</h2>
+                        <p class="text-gray-600">{{ weather_data.description }}</p>
+                    </div>
+                    <div class="text-4xl font-bold">{{ weather_data.temperature }}°C</div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-4">
+                    <div class="bg-white rounded p-3">
+                        <p class="text-gray-600">湿度</p>
+                        <p class="font-semibold">{{ weather_data.humidity }}%</p>
+                    </div>
+                    <div class="bg-white rounded p-3">
+                        <p class="text-gray-600">风速</p>
+                        <p class="font-semibold">{{ weather_data.wind_speed }} m/s</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+"""
+
+# 项目扩展建议：
+# 1. 添加历史天气数据查询功能
+# 2. 实现天气预报功能（使用 OpenWeatherMap 的 forecast API）
+# 3. 添加地理位置自动检测
+# 4. 优化 UI 设计，添加响应式布局
+# 5. 实现数据可视化，显示温度变化趋势
+# 6. 添加多个城市天气对比功能
+# 7. 实现天气数据缓存，减少 API 请求
+# 8. 添加用户收藏城市功能
+# 9. 实现多语言支持
+# 10. 部署到云平台，如 Heroku 或 Vercel</pre>
+                    </div>
+                    <div class="note-box">
+                        <p class="text-gray-300">
+                            <strong class="text-secondary">提示：</strong> 你需要在 OpenWeatherMap 网站注册并获取 API 密钥才能使用这个应用。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目规划 -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-primary">项目规划建议</h2>
+                <div class="bg-dark border border-white/10 rounded-2xl p-8 mb-12">
+                    <p class="text-gray-300 mb-6">
+                        完成以上项目后，你可以尝试以下项目来进一步提升你的 Python 技能：
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-dark/50 border border-white/10 rounded-xl p-6">
+                            <h3 class="font-bold text-lg text-primary mb-3">数据分析类项目</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>股票市场分析</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>社交媒体数据分析</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>客户行为分析</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>健康数据分析</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>交通数据分析</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-dark/50 border border-white/10 rounded-xl p-6">
+                            <h3 class="font-bold text-lg text-primary mb-3">机器学习类项目</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>图像分类（猫狗识别）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>情感分析</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>推荐系统</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>异常检测</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>时间序列预测</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-dark/50 border border-white/10 rounded-xl p-6">
+                            <h3 class="font-bold text-lg text-primary mb-3">Web 应用类项目</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>个人博客系统</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>任务管理应用</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>在线商城</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>图书管理系统</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>聊天应用</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-dark/50 border border-white/10 rounded-xl p-6">
+                            <h3 class="font-bold text-lg text-primary mb-3">自动化工具类项目</h3>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>文件整理工具</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>数据备份工具</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>网页爬虫</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>邮件自动发送工具</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                    <span>社交媒体自动发布工具</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="python-course.html" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 inline-block text-lg font-medium">
+                        完成本单元，返回课程首页
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-10 border-t border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2026 Python 学习站点. 保留所有权利.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-300">首页</a>
+                    <a href="python-course.html" class="text-gray-400 hover:text-primary transition-colors duration-300">课程首页</a>
+                    <a href="python-core.html" class="text-gray-400 hover:text-primary transition-colors duration-300">基础语法</a>
+                    <a href="python-data.html" class="text-gray-400 hover:text-primary transition-colors duration-300">数据处理</a>
+                    <a href="python-ai.html" class="text-gray-400 hover:text-primary transition-colors duration-300">AI入门</a>
+                    <a href="#projects" class="text-gray-400 hover:text-primary transition-colors duration-300">项目实战</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // 关闭移动端菜单
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-dark/80');
+            } else {
+                nav.classList.remove('bg-dark/80');
+            }
+        });
+    </script>
+</body>
+</html>
