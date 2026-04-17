@@ -246,6 +246,9 @@
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
                                 </button>
@@ -277,6 +280,9 @@
                             <div class="flex space-x-2">
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
@@ -321,6 +327,9 @@ print("Hello, World!")  # 这也是一个注释</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
                                 </button>
@@ -362,6 +371,9 @@ print(complex_num)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
                                 </button>
@@ -395,6 +407,9 @@ print(poem)</textarea>
                             <div class="flex space-x-2">
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
@@ -431,6 +446,9 @@ print(length)</textarea>
                             <div class="flex space-x-2">
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
@@ -476,6 +494,9 @@ print(last_fruit)</textarea>
                             <div class="flex space-x-2">
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
@@ -526,6 +547,9 @@ print(age)</textarea>
                             <div class="flex space-x-2">
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
                                     <i class="fa fa-chevron-up"></i>
@@ -908,6 +932,10 @@ else:
                 const runButton = editorElement.querySelector('.run-button');
                 const collapseButton = editorElement.querySelector('.collapse-button');
                 const codeBody = editorElement.querySelector('.code-runner-body');
+                const resetButton = editorElement.querySelector('.reset-button');
+                
+                // 保存原始代码
+                const originalCode = textarea.value;
                 
                 // 初始化 CodeMirror
                 const editor = CodeMirror.fromTextArea(textarea, {
@@ -926,6 +954,14 @@ else:
                     outputElement.textContent = '';
                     await runCode(code, outputElement);
                 });
+                
+                // 重置按钮点击事件
+                if (resetButton) {
+                    resetButton.addEventListener('click', () => {
+                        editor.setValue(originalCode);
+                        outputElement.textContent = '';
+                    });
+                }
                 
                 // 折叠按钮点击事件
                 collapseButton.addEventListener('click', () => {
