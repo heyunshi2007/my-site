@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面 2</title>
+</head>
+<body>
+    <h1>测试页面 2</h1>
+    <div id="test-div"></div>
+    <script>
+        console.log("JavaScript 执行测试");
+        document.getElementById('test-div').innerHTML = "JavaScript 已执行";
+        
+        // 测试 DOMContentLoaded 事件
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log("DOMContentLoaded 事件触发");
+        });
+    </script>
+</body>
+</html>

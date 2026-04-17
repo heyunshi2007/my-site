@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <!-- 代码编辑器和运行环境 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <!-- Pyodide 用于在浏览器中运行 Python -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -67,6 +76,85 @@
                 border-left: 4px solid #ec4899;
                 padding: 1rem;
                 border-radius: 0 0.5rem 0.5rem 0;
+            }
+            .code-editor {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.5rem;
+                overflow: hidden;
+                margin: 1rem 0;
+            }
+            .CodeMirror {
+                height: auto !important;
+                min-height: 100px;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            .code-runner {
+                position: relative;
+                margin: 1rem 0;
+            }
+            .code-runner-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1rem;
+                background-color: rgba(15, 23, 42, 0.9);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .code-runner-body {
+                padding: 1rem;
+                background-color: rgba(15, 23, 42, 0.8);
+            }
+            .code-output {
+                margin-top: 0.5rem;
+                padding: 0.5rem;
+                background-color: rgba(15, 23, 42, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.25rem;
+                font-family: 'Courier New', monospace;
+                white-space: pre-wrap;
+                min-height: 50px;
+            }
+            .run-button {
+                background-color: #06b6d4;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            .run-button:hover {
+                background-color: #0e7490;
+            }
+            .run-button:disabled {
+                background-color: #64748b;
+                cursor: not-allowed;
+            }
+            .reset-button {
+                background-color: #64748b;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 14px;
+                margin-left: 0.5rem;
+            }
+            .reset-button:hover {
+                background-color: #475569;
+            }
+            .collapse-button {
+                background: none;
+                border: none;
+                color: #94a3b8;
+                cursor: pointer;
+                font-size: 16px;
+                margin-left: 0.5rem;
+            }
+            .collapse-button:hover {
+                color: #e2e8f0;
             }
         }
     </style>
@@ -142,8 +230,23 @@
                     <p class="text-gray-300 mb-6">
                         NumPy 的核心是 ndarray（n-dimensional array）对象：
                     </p>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入 NumPy
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入 NumPy
 import numpy as np
 
 # 创建一维数组
@@ -165,11 +268,28 @@ linspace = np.linspace(0, 1, 5)  # 从 0 到 1，等分为 5 个点
 print("\n全零数组:", zeros)
 print("全一数组:", ones)
 print("range 数组:", range_arr)
-print("linspace 数组:", linspace)</pre>
+print("linspace 数组:", linspace)</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">数组操作</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 数组索引和切片
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 数组索引和切片
 arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 print("原始数组:")
 print(arr)
@@ -193,11 +313,28 @@ print("数组平方:", arr1 ** 2)
 print("数组平均值:", np.mean(arr1))
 print("数组总和:", np.sum(arr2))
 print("数组最大值:", np.max(arr1))
-print("数组最小值:", np.min(arr2))</pre>
+print("数组最小值:", np.min(arr2))</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">数组形状操作</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 形状操作
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 形状操作
 arr = np.array([[1, 2, 3], [4, 5, 6]])
 print("原始数组:")
 print(arr)
@@ -215,7 +352,9 @@ print("\n展平数组:", flattened)
 # 转置
 transposed = arr.T
 print("\n转置数组:")
-print(transposed)</pre>
+print(transposed)</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -245,8 +384,23 @@ print(transposed)</pre>
                     <p class="text-gray-300 mb-6">
                         Series 是一维标记数组，可以保存任何数据类型：
                     </p>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入 Pandas
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入 Pandas
 import pandas as pd
 
 # 创建 Series
@@ -275,14 +429,31 @@ print("s2[0]:", s2[0])
 
 # 布尔索引
 print("\n布尔索引:")
-print(s1[s1 > 2])</pre>
+print(s1[s1 > 2])</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">DataFrame</h3>
                     <p class="text-gray-300 mb-6">
                         DataFrame 是二维标记数据结构，类似于电子表格或 SQL 表：
                     </p>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 创建 DataFrame
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 创建 DataFrame
 # 从字典创建
 data = {
     'name': ['Alice', 'Bob', 'Charlie', 'David'],
@@ -321,11 +492,28 @@ print(df)
 # 删除列
 df.drop('salary', axis=1, inplace=True)
 print("\n删除 'salary' 列:")
-print(df)</pre>
+print(df)</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">数据操作</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 数据操作
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 数据操作
 data = {
     'name': ['Alice', 'Bob', 'Charlie', 'David', 'Alice'],
     'age': [25, 30, 35, 40, 25],
@@ -351,8 +539,8 @@ print(df.groupby('city').agg({'age': 'mean', 'score': 'mean'}))
 # 处理缺失值
 # 首先创建包含缺失值的数据
 df_with_na = df.copy()
-df_with_na.loc['a', 'score'] = None
-df_with_na.loc['b', 'age'] = None
+df_with_na.loc[0, 'score'] = None
+df_with_na.loc[1, 'age'] = None
 print("\n包含缺失值的数据:")
 print(df_with_na)
 
@@ -365,7 +553,9 @@ print(df_filled)
 # 写入 CSV
 # df.to_csv('data.csv', index=False)
 # 读取 CSV
-# df_read = pd.read_csv('data.csv')</pre>
+# df_read = pd.read_csv('data.csv')</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -392,8 +582,23 @@ print(df_filled)
                         </p>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">Matplotlib 基础</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入 Matplotlib
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入 Matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -442,11 +647,28 @@ plt.hist(data, bins=30, alpha=0.7, color='purple')
 plt.title('Histogram')
 plt.xlabel('Value')
 plt.ylabel('Frequency')
-# plt.show()</pre>
+# plt.show()</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">Seaborn 高级图表</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入 Seaborn
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入 Seaborn
 import seaborn as sns
 import pandas as pd
 
@@ -488,7 +710,9 @@ plt.suptitle('Pair Plot of Tips Data', y=1.02)
 plt.figure(figsize=(10, 6))
 sns.swarmplot(x="day", y="total_bill", hue="sex", data=tips)
 plt.title('Swarm Plot of Total Bill by Day and Gender')
-# plt.show()</pre>
+# plt.show()</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -509,8 +733,23 @@ plt.title('Swarm Plot of Total Bill by Day and Gender')
                     <p class="text-gray-300 mb-6">
                         现在让我们通过一个实际的数据分析案例来综合运用所学的知识：
                     </p>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 综合实践：分析学生成绩数据
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 综合实践：分析学生成绩数据
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -588,7 +827,9 @@ for subject in subjects:
     sns.regplot(x="age", y=subject, data=df, scatter_kws={'alpha': 0.5})
 plt.title('Score vs Age')
 plt.legend(subjects)
-# plt.show()</pre>
+# plt.show()</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -655,6 +896,155 @@ plt.legend(subjects)
                 nav.classList.add('bg-dark/80');
             } else {
                 nav.classList.remove('bg-dark/80');
+            }
+        });
+
+        // 代码运行功能
+        let pyodide;
+        let codeEditors = [];
+        
+        // 初始化 Pyodide
+        async function initPyodide() {
+            try {
+                console.log("开始初始化 Pyodide...");
+                // 确保 loadPyodide 函数存在
+                if (typeof loadPyodide === 'undefined') {
+                    console.error("loadPyodide 函数未定义");
+                    throw new Error("Pyodide 库未加载");
+                }
+                
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+                });
+                console.log("Pyodide 初始化成功！");
+                
+                // 初始化完成后启用所有运行按钮
+                const runButtons = document.querySelectorAll('.run-button');
+                console.log(`找到 ${runButtons.length} 个运行按钮`);
+                runButtons.forEach((btn, index) => {
+                    console.log(`启用第 ${index + 1} 个运行按钮`);
+                    btn.disabled = false;
+                });
+                
+                return true;
+            } catch (error) {
+                console.error("Pyodide 初始化失败:", error);
+                // 即使 Pyodide 初始化失败，也启用运行按钮，只是会显示错误信息
+                const runButtons = document.querySelectorAll('.run-button');
+                runButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                return false;
+            }
+        }
+
+        // 运行代码
+        async function runCode(code, outputElement) {
+            try {
+                outputElement.textContent = "运行中...";
+                
+                if (!pyodide) {
+                    outputElement.textContent = "错误: Pyodide 未初始化，请刷新页面重试。";
+                    return;
+                }
+                
+                // 重定向标准输出到 outputElement
+                pyodide.setStdout({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                pyodide.setStderr({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                
+                // 运行代码
+                await pyodide.runPythonAsync(code);
+            } catch (error) {
+                outputElement.textContent = `错误: ${error.message}`;
+                console.error("运行代码时出错:", error);
+            }
+        }
+
+        // 初始化代码编辑器
+        function initCodeEditors() {
+            console.log("开始初始化代码编辑器...");
+            document.querySelectorAll('.code-editor').forEach((editorElement, index) => {
+                const textarea = editorElement.querySelector('textarea');
+                const outputElement = editorElement.querySelector('.code-output');
+                const runButton = editorElement.querySelector('.run-button');
+                const collapseButton = editorElement.querySelector('.collapse-button');
+                const codeBody = editorElement.querySelector('.code-runner-body');
+                const resetButton = editorElement.querySelector('.reset-button');
+                
+                if (!textarea || !outputElement || !runButton) {
+                    console.error(`编辑器元素缺失: textarea=${!!textarea}, output=${!!outputElement}, runButton=${!!runButton}`);
+                    return;
+                }
+                
+                // 保存原始代码
+                const originalCode = textarea.value;
+                console.log(`编辑器 ${index + 1} 原始代码:`, originalCode);
+                
+                // 初始化 CodeMirror
+                try {
+                    const editor = CodeMirror.fromTextArea(textarea, {
+                        mode: 'python',
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        autoCloseBrackets: true,
+                        theme: 'monokai',
+                        indentUnit: 4,
+                        indentWithTabs: false
+                    });
+                    codeEditors.push(editor);
+                    console.log(`编辑器 ${index + 1} 初始化成功`);
+                    
+                    // 运行按钮点击事件
+                    runButton.addEventListener('click', async () => {
+                        const code = editor.getValue();
+                        console.log(`运行代码:`, code);
+                        outputElement.textContent = '';
+                        await runCode(code, outputElement);
+                    });
+                    
+                    // 重置按钮点击事件
+                    if (resetButton) {
+                        resetButton.addEventListener('click', () => {
+                            console.log(`重置编辑器 ${index + 1}`);
+                            editor.setValue(originalCode);
+                            outputElement.textContent = '';
+                        });
+                    }
+                    
+                    // 折叠按钮点击事件
+                    if (collapseButton) {
+                        collapseButton.addEventListener('click', () => {
+                            codeBody.classList.toggle('hidden');
+                            const icon = collapseButton.querySelector('i');
+                            if (codeBody.classList.contains('hidden')) {
+                                icon.className = 'fa fa-chevron-down';
+                            } else {
+                                icon.className = 'fa fa-chevron-up';
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error(`初始化编辑器 ${index + 1} 时出错:`, error);
+                }
+            });
+            console.log(`代码编辑器初始化完成，共 ${codeEditors.length} 个编辑器`);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log("DOMContentLoaded 事件触发");
+            try {
+                // 先初始化代码编辑器
+                initCodeEditors();
+                // 然后初始化 Pyodide
+                await initPyodide();
+                console.log("初始化过程完成");
+            } catch (error) {
+                console.error("初始化过程中发生错误:", error);
             }
         });
     </script>

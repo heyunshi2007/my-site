@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <!-- 代码编辑器和运行环境 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
@@ -80,6 +81,7 @@
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: 0.5rem;
                 overflow: hidden;
+                margin: 1rem 0;
             }
             .CodeMirror {
                 height: auto !important;
@@ -130,12 +132,26 @@
                 background-color: #64748b;
                 cursor: not-allowed;
             }
+            .reset-button {
+                background-color: #64748b;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 14px;
+                margin-left: 0.5rem;
+            }
+            .reset-button:hover {
+                background-color: #475569;
+            }
             .collapse-button {
                 background: none;
                 border: none;
                 color: #94a3b8;
                 cursor: pointer;
                 font-size: 16px;
+                margin-left: 0.5rem;
             }
             .collapse-button:hover {
                 color: #e2e8f0;
@@ -246,7 +262,7 @@
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -281,7 +297,7 @@
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -327,7 +343,7 @@ print("Hello, World!")  # 这也是一个注释</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -371,7 +387,7 @@ print(complex_num)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -408,7 +424,7 @@ print(poem)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -447,7 +463,7 @@ print(length)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -495,7 +511,7 @@ print(last_fruit)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -548,7 +564,7 @@ print(age)</textarea>
                                 <button class="run-button" disabled>
                                     <i class="fa fa-play mr-1"></i> 运行
                                 </button>
-                                <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <button class="reset-button">
                                     <i class="fa fa-refresh mr-1"></i> 重置
                                 </button>
                                 <button class="collapse-button">
@@ -646,7 +662,7 @@ for key, value in student.items():
                     <div class="code-block mb-6">
                         <pre class="code-line text-gray-300"># 简单的 while 循环
 count = 0
-while count < 5:
+while count &lt; 5:
     print(f"计数: {count}")
     count += 1  # 不要忘记更新计数器，否则会无限循环
 
@@ -759,11 +775,11 @@ bmi = calculate_bmi(weight, height)
 print(f"你的BMI是: {bmi:.2f}")
 
 # 根据BMI值给出建议
-if bmi < 18.5:
+if bmi &lt; 18.5:
     print("体重过轻")
-elif 18.5 <= bmi < 24:
+elif 18.5 &lt;= bmi &lt; 24:
     print("体重正常")
-elif 24 <= bmi < 28:
+elif 24 &lt;= bmi &lt; 28:
     print("超重")
 else:
     print("肥胖")</pre>
@@ -854,6 +870,155 @@ else:
     </footer>
 
     <script>
+        // 代码运行功能
+        let pyodide;
+        let codeEditors = [];
+        
+        // 初始化 Pyodide
+        async function initPyodide() {
+            try {
+                console.log("开始初始化 Pyodide...");
+                // 确保 loadPyodide 函数存在
+                if (typeof loadPyodide === 'undefined') {
+                    console.error("loadPyodide 函数未定义");
+                    throw new Error("Pyodide 库未加载");
+                }
+                
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+                });
+                console.log("Pyodide 初始化成功！");
+                
+                // 初始化完成后启用所有运行按钮
+                const runButtons = document.querySelectorAll('.run-button');
+                console.log(`找到 ${runButtons.length} 个运行按钮`);
+                runButtons.forEach((btn, index) => {
+                    console.log(`启用第 ${index + 1} 个运行按钮`);
+                    btn.disabled = false;
+                });
+                
+                return true;
+            } catch (error) {
+                console.error("Pyodide 初始化失败:", error);
+                // 即使 Pyodide 初始化失败，也启用运行按钮，只是会显示错误信息
+                const runButtons = document.querySelectorAll('.run-button');
+                runButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                return false;
+            }
+        }
+
+        // 运行代码
+        async function runCode(code, outputElement) {
+            try {
+                outputElement.textContent = "运行中...";
+                
+                if (!pyodide) {
+                    outputElement.textContent = "错误: Pyodide 未初始化，请刷新页面重试。";
+                    return;
+                }
+                
+                // 重定向标准输出到 outputElement
+                pyodide.setStdout({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                pyodide.setStderr({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                
+                // 运行代码
+                await pyodide.runPythonAsync(code);
+            } catch (error) {
+                outputElement.textContent = `错误: ${error.message}`;
+                console.error("运行代码时出错:", error);
+            }
+        }
+
+        // 初始化代码编辑器
+        function initCodeEditors() {
+            console.log("开始初始化代码编辑器...");
+            document.querySelectorAll('.code-editor').forEach((editorElement, index) => {
+                const textarea = editorElement.querySelector('textarea');
+                const outputElement = editorElement.querySelector('.code-output');
+                const runButton = editorElement.querySelector('.run-button');
+                const collapseButton = editorElement.querySelector('.collapse-button');
+                const codeBody = editorElement.querySelector('.code-runner-body');
+                const resetButton = editorElement.querySelector('.reset-button');
+                
+                if (!textarea || !outputElement || !runButton) {
+                    console.error(`编辑器元素缺失: textarea=${!!textarea}, output=${!!outputElement}, runButton=${!!runButton}`);
+                    return;
+                }
+                
+                // 保存原始代码
+                const originalCode = textarea.value;
+                console.log(`编辑器 ${index + 1} 原始代码:`, originalCode);
+                
+                // 初始化 CodeMirror
+                try {
+                    const editor = CodeMirror.fromTextArea(textarea, {
+                        mode: 'python',
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        autoCloseBrackets: true,
+                        theme: 'monokai',
+                        indentUnit: 4,
+                        indentWithTabs: false
+                    });
+                    codeEditors.push(editor);
+                    console.log(`编辑器 ${index + 1} 初始化成功`);
+                    
+                    // 运行按钮点击事件
+                    runButton.addEventListener('click', async () => {
+                        const code = editor.getValue();
+                        console.log(`运行代码:`, code);
+                        outputElement.textContent = '';
+                        await runCode(code, outputElement);
+                    });
+                    
+                    // 重置按钮点击事件
+                    if (resetButton) {
+                        resetButton.addEventListener('click', () => {
+                            console.log(`重置编辑器 ${index + 1}`);
+                            editor.setValue(originalCode);
+                            outputElement.textContent = '';
+                        });
+                    }
+                    
+                    // 折叠按钮点击事件
+                    if (collapseButton) {
+                        collapseButton.addEventListener('click', () => {
+                            codeBody.classList.toggle('hidden');
+                            const icon = collapseButton.querySelector('i');
+                            if (codeBody.classList.contains('hidden')) {
+                                icon.className = 'fa fa-chevron-down';
+                            } else {
+                                icon.className = 'fa fa-chevron-up';
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error(`初始化编辑器 ${index + 1} 时出错:`, error);
+                }
+            });
+            console.log(`代码编辑器初始化完成，共 ${codeEditors.length} 个编辑器`);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log("DOMContentLoaded 事件触发");
+            try {
+                // 先初始化代码编辑器
+                initCodeEditors();
+                // 然后初始化 Pyodide
+                await initPyodide();
+                console.log("初始化过程完成");
+            } catch (error) {
+                console.error("初始化过程中发生错误:", error);
+            }
+        });
+        
         // 移动端菜单切换
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const menu = document.getElementById('mobileMenu');
@@ -884,102 +1049,6 @@ else:
             } else {
                 nav.classList.remove('bg-dark/80');
             }
-        });
-
-        // 代码运行功能
-        let pyodide;
-        
-        // 初始化 Pyodide
-        async function initPyodide() {
-            try {
-                pyodide = await loadPyodide({
-                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
-                });
-                // 初始化完成后启用所有运行按钮
-                document.querySelectorAll('.run-button').forEach(btn => {
-                    btn.disabled = false;
-                });
-            } catch (error) {
-                console.error("Pyodide 初始化失败:", error);
-                alert("代码运行环境初始化失败，请刷新页面重试。");
-            }
-        }
-
-        // 运行代码
-        async function runCode(code, outputElement) {
-            try {
-                outputElement.textContent = "运行中...";
-                // 重定向标准输出到 outputElement
-                pyodide.setStdout({ write: (text) => {
-                    outputElement.textContent += text;
-                }});
-                pyodide.setStderr({ write: (text) => {
-                    outputElement.textContent += text;
-                }});
-                
-                // 运行代码
-                await pyodide.runPythonAsync(code);
-            } catch (error) {
-                outputElement.textContent = `错误: ${error.message}`;
-            }
-        }
-
-        // 初始化代码编辑器
-        function initCodeEditors() {
-            document.querySelectorAll('.code-editor').forEach((editorElement, index) => {
-                const textarea = editorElement.querySelector('textarea');
-                const outputElement = editorElement.querySelector('.code-output');
-                const runButton = editorElement.querySelector('.run-button');
-                const collapseButton = editorElement.querySelector('.collapse-button');
-                const codeBody = editorElement.querySelector('.code-runner-body');
-                const resetButton = editorElement.querySelector('.reset-button');
-                
-                // 保存原始代码
-                const originalCode = textarea.value;
-                
-                // 初始化 CodeMirror
-                const editor = CodeMirror.fromTextArea(textarea, {
-                    mode: 'python',
-                    lineNumbers: true,
-                    matchBrackets: true,
-                    autoCloseBrackets: true,
-                    theme: 'monokai',
-                    indentUnit: 4,
-                    indentWithTabs: false
-                });
-                
-                // 运行按钮点击事件
-                runButton.addEventListener('click', async () => {
-                    const code = editor.getValue();
-                    outputElement.textContent = '';
-                    await runCode(code, outputElement);
-                });
-                
-                // 重置按钮点击事件
-                if (resetButton) {
-                    resetButton.addEventListener('click', () => {
-                        editor.setValue(originalCode);
-                        outputElement.textContent = '';
-                    });
-                }
-                
-                // 折叠按钮点击事件
-                collapseButton.addEventListener('click', () => {
-                    codeBody.classList.toggle('hidden');
-                    const icon = collapseButton.querySelector('i');
-                    if (codeBody.classList.contains('hidden')) {
-                        icon.className = 'fa fa-chevron-down';
-                    } else {
-                        icon.className = 'fa fa-chevron-up';
-                    }
-                });
-            });
-        }
-
-        // 页面加载完成后初始化
-        window.addEventListener('DOMContentLoaded', async () => {
-            await initPyodide();
-            initCodeEditors();
         });
     </script>
 </body>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 基础语法 - 学习单元</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 代码编辑器和运行环境 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <!-- Pyodide 用于在浏览器中运行 Python -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+</head>
+<body class="bg-dark text-light font-inter min-h-screen">
+    <div style="position: fixed; top: 10px; right: 10px; background: red; color: white; padding: 10px; z-index: 9999;">页面已加载</div>
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark/80 border-b border-white/10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <a href="index.html" class="text-white">个人主页</a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="python-course.html" class="hover:text-blue-400 transition-colors duration-300">课程首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="min-h-[40vh] flex items-center justify-center relative overflow-hidden py-20 pt-32">
+        <div class="container mx-auto px-4 z-10">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    Python 基础语法
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    适合小白的 Python 入门教程，从零基础开始学习 Python 编程
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第一个 Python 程序 -->
+    <section class="py-20 relative bg-dark/50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6">第一个 Python 程序</h3>
+                <div class="code-editor">
+                    <div class="code-runner-header">
+                        <span class="font-medium">Python 代码</span>
+                        <div class="flex space-x-2">
+                            <button class="run-button" disabled>
+                                <i class="fa fa-play mr-1"></i> 运行
+                            </button>
+                            <button class="reset-button bg-gray-700 text-white border-none px-2 py-1 rounded text-sm">
+                                <i class="fa fa-refresh mr-1"></i> 重置
+                            </button>
+                            <button class="collapse-button">
+                                <i class="fa fa-chevron-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-runner-body">
+                        <textarea>print("Hello, World!")</textarea>
+                        <div class="code-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        console.log("JavaScript 执行测试");
+        
+        // 代码运行功能
+        let pyodide;
+        let codeEditors = [];
+        
+        // 初始化 Pyodide
+        async function initPyodide() {
+            try {
+                console.log("开始初始化 Pyodide...");
+                // 确保 loadPyodide 函数存在
+                if (typeof loadPyodide === 'undefined') {
+                    console.error("loadPyodide 函数未定义");
+                    throw new Error("Pyodide 库未加载");
+                }
+                
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+                });
+                console.log("Pyodide 初始化成功！");
+                
+                // 初始化完成后启用所有运行按钮
+                const runButtons = document.querySelectorAll('.run-button');
+                console.log(`找到 ${runButtons.length} 个运行按钮`);
+                runButtons.forEach((btn, index) => {
+                    console.log(`启用第 ${index + 1} 个运行按钮`);
+                    btn.disabled = false;
+                });
+                
+                return true;
+            } catch (error) {
+                console.error("Pyodide 初始化失败:", error);
+                // 即使 Pyodide 初始化失败，也启用运行按钮，只是会显示错误信息
+                const runButtons = document.querySelectorAll('.run-button');
+                runButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                return false;
+            }
+        }
+
+        // 运行代码
+        async function runCode(code, outputElement) {
+            try {
+                outputElement.textContent = "运行中...";
+                
+                if (!pyodide) {
+                    outputElement.textContent = "错误: Pyodide 未初始化，请刷新页面重试。";
+                    return;
+                }
+                
+                // 重定向标准输出到 outputElement
+                pyodide.setStdout({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                pyodide.setStderr({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                
+                // 运行代码
+                await pyodide.runPythonAsync(code);
+            } catch (error) {
+                outputElement.textContent = `错误: ${error.message}`;
+                console.error("运行代码时出错:", error);
+            }
+        }
+
+        // 初始化代码编辑器
+        function initCodeEditors() {
+            console.log("开始初始化代码编辑器...");
+            document.querySelectorAll('.code-editor').forEach((editorElement, index) => {
+                const textarea = editorElement.querySelector('textarea');
+                const outputElement = editorElement.querySelector('.code-output');
+                const runButton = editorElement.querySelector('.run-button');
+                const collapseButton = editorElement.querySelector('.collapse-button');
+                const codeBody = editorElement.querySelector('.code-runner-body');
+                const resetButton = editorElement.querySelector('.reset-button');
+                
+                if (!textarea || !outputElement || !runButton) {
+                    console.error(`编辑器元素缺失: textarea=${!!textarea}, output=${!!outputElement}, runButton=${!!runButton}`);
+                    return;
+                }
+                
+                // 保存原始代码
+                const originalCode = textarea.value;
+                console.log(`编辑器 ${index + 1} 原始代码:`, originalCode);
+                
+                // 初始化 CodeMirror
+                try {
+                    const editor = CodeMirror.fromTextArea(textarea, {
+                        mode: 'python',
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        autoCloseBrackets: true,
+                        theme: 'monokai',
+                        indentUnit: 4,
+                        indentWithTabs: false
+                    });
+                    codeEditors.push(editor);
+                    console.log(`编辑器 ${index + 1} 初始化成功`);
+                    
+                    // 运行按钮点击事件
+                    runButton.addEventListener('click', async () => {
+                        const code = editor.getValue();
+                        console.log(`运行代码:`, code);
+                        outputElement.textContent = '';
+                        await runCode(code, outputElement);
+                    });
+                    
+                    // 重置按钮点击事件
+                    if (resetButton) {
+                        resetButton.addEventListener('click', () => {
+                            console.log(`重置编辑器 ${index + 1}`);
+                            editor.setValue(originalCode);
+                            outputElement.textContent = '';
+                        });
+                    }
+                    
+                    // 折叠按钮点击事件
+                    if (collapseButton) {
+                        collapseButton.addEventListener('click', () => {
+                            codeBody.classList.toggle('hidden');
+                            const icon = collapseButton.querySelector('i');
+                            if (codeBody.classList.contains('hidden')) {
+                                icon.className = 'fa fa-chevron-down';
+                            } else {
+                                icon.className = 'fa fa-chevron-up';
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error(`初始化编辑器 ${index + 1} 时出错:`, error);
+                }
+            });
+            console.log(`代码编辑器初始化完成，共 ${codeEditors.length} 个编辑器`);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log("DOMContentLoaded 事件触发");
+            try {
+                // 先初始化代码编辑器
+                initCodeEditors();
+                // 然后初始化 Pyodide
+                await initPyodide();
+                console.log("初始化过程完成");
+            } catch (error) {
+                console.error("初始化过程中发生错误:", error);
+            }
+        });
+    </script>
+</body>
+</html>

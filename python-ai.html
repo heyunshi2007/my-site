@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <!-- 代码编辑器和运行环境 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <!-- Pyodide 用于在浏览器中运行 Python -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -67,6 +76,85 @@
                 border-left: 4px solid #ec4899;
                 padding: 1rem;
                 border-radius: 0 0.5rem 0.5rem 0;
+            }
+            .code-editor {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.5rem;
+                overflow: hidden;
+                margin: 1rem 0;
+            }
+            .CodeMirror {
+                height: auto !important;
+                min-height: 100px;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            .code-runner {
+                position: relative;
+                margin: 1rem 0;
+            }
+            .code-runner-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1rem;
+                background-color: rgba(15, 23, 42, 0.9);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .code-runner-body {
+                padding: 1rem;
+                background-color: rgba(15, 23, 42, 0.8);
+            }
+            .code-output {
+                margin-top: 0.5rem;
+                padding: 0.5rem;
+                background-color: rgba(15, 23, 42, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.25rem;
+                font-family: 'Courier New', monospace;
+                white-space: pre-wrap;
+                min-height: 50px;
+            }
+            .run-button {
+                background-color: #06b6d4;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            .run-button:hover {
+                background-color: #0e7490;
+            }
+            .run-button:disabled {
+                background-color: #64748b;
+                cursor: not-allowed;
+            }
+            .reset-button {
+                background-color: #64748b;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 14px;
+                margin-left: 0.5rem;
+            }
+            .reset-button:hover {
+                background-color: #475569;
+            }
+            .collapse-button {
+                background: none;
+                border: none;
+                color: #94a3b8;
+                cursor: pointer;
+                font-size: 16px;
+                margin-left: 0.5rem;
+            }
+            .collapse-button:hover {
+                color: #e2e8f0;
             }
         }
     </style>
@@ -169,8 +257,23 @@
                         </li>
                     </ul>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">Scikit-learn 工作流程</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入必要的库
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入必要的库
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -221,7 +324,9 @@ new_data = np.array([[5.1, 3.5, 1.4, 0.2]])  # 新数据
 new_data_scaled = scaler.transform(new_data)
 prediction = model.predict(new_data_scaled)
 print(f"新数据预测结果: {prediction}")
-print(f"预测的类别: {iris.target_names[prediction][0]}")</pre>
+print(f"预测的类别: {iris.target_names[prediction][0]}")</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">常用机器学习算法</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -331,8 +436,23 @@ print(f"预测的类别: {iris.target_names[prediction][0]}")</pre>
                         </li>
                     </ul>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">使用 TensorFlow/Keras 构建神经网络</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入必要的库
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入必要的库
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -383,11 +503,28 @@ plt.title(f"真实标签: {y_test[index]}")
 test_image = test_image.reshape(1, 28, 28)  # 调整形状
 prediction = model.predict(test_image)
 predicted_label = np.argmax(prediction)
-print(f"预测标签: {predicted_label}")</pre>
+print(f"预测标签: {predicted_label}")</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-secondary">使用 PyTorch 构建神经网络</h3>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 导入必要的库
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 导入必要的库
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -468,7 +605,9 @@ for t in range(epochs):
     print(f"第 {t+1} 轮\n-------------------------------")
     train(train_loader, model, loss_fn, optimizer)
     test(test_loader, model, loss_fn)
-print("训练完成！")</pre>
+print("训练完成！")</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -489,8 +628,23 @@ print("训练完成！")</pre>
                     <p class="text-gray-300 mb-6">
                         现在让我们通过一个实际的图像分类项目来综合运用所学的深度学习知识：
                     </p>
-                    <div class="code-block mb-6">
-                        <pre class="code-line text-gray-300"># 实践项目：使用 Keras 进行 MNIST 手写数字分类
+                    <div class="code-editor">
+                        <div class="code-runner-header">
+                            <span class="font-medium">Python 代码</span>
+                            <div class="flex space-x-2">
+                                <button class="run-button" disabled>
+                                    <i class="fa fa-play mr-1"></i> 运行
+                                </button>
+                                <button class="reset-button">
+                                    <i class="fa fa-refresh mr-1"></i> 重置
+                                </button>
+                                <button class="collapse-button">
+                                    <i class="fa fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-runner-body">
+                            <textarea># 实践项目：使用 Keras 进行 MNIST 手写数字分类
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -576,7 +730,9 @@ for i in range(5):
     plt.title(f"预测: {predicted_label}")
 
 plt.tight_layout()
-# plt.show()</pre>
+# plt.show()</textarea>
+                            <div class="code-output"></div>
+                        </div>
                     </div>
                     <div class="note-box">
                         <p class="text-gray-300">
@@ -643,6 +799,155 @@ plt.tight_layout()
                 nav.classList.add('bg-dark/80');
             } else {
                 nav.classList.remove('bg-dark/80');
+            }
+        });
+
+        // 代码运行功能
+        let pyodide;
+        let codeEditors = [];
+        
+        // 初始化 Pyodide
+        async function initPyodide() {
+            try {
+                console.log("开始初始化 Pyodide...");
+                // 确保 loadPyodide 函数存在
+                if (typeof loadPyodide === 'undefined') {
+                    console.error("loadPyodide 函数未定义");
+                    throw new Error("Pyodide 库未加载");
+                }
+                
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+                });
+                console.log("Pyodide 初始化成功！");
+                
+                // 初始化完成后启用所有运行按钮
+                const runButtons = document.querySelectorAll('.run-button');
+                console.log(`找到 ${runButtons.length} 个运行按钮`);
+                runButtons.forEach((btn, index) => {
+                    console.log(`启用第 ${index + 1} 个运行按钮`);
+                    btn.disabled = false;
+                });
+                
+                return true;
+            } catch (error) {
+                console.error("Pyodide 初始化失败:", error);
+                // 即使 Pyodide 初始化失败，也启用运行按钮，只是会显示错误信息
+                const runButtons = document.querySelectorAll('.run-button');
+                runButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+                return false;
+            }
+        }
+
+        // 运行代码
+        async function runCode(code, outputElement) {
+            try {
+                outputElement.textContent = "运行中...";
+                
+                if (!pyodide) {
+                    outputElement.textContent = "错误: Pyodide 未初始化，请刷新页面重试。";
+                    return;
+                }
+                
+                // 重定向标准输出到 outputElement
+                pyodide.setStdout({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                pyodide.setStderr({ write: (text) => {
+                    outputElement.textContent += text;
+                }});
+                
+                // 运行代码
+                await pyodide.runPythonAsync(code);
+            } catch (error) {
+                outputElement.textContent = `错误: ${error.message}`;
+                console.error("运行代码时出错:", error);
+            }
+        }
+
+        // 初始化代码编辑器
+        function initCodeEditors() {
+            console.log("开始初始化代码编辑器...");
+            document.querySelectorAll('.code-editor').forEach((editorElement, index) => {
+                const textarea = editorElement.querySelector('textarea');
+                const outputElement = editorElement.querySelector('.code-output');
+                const runButton = editorElement.querySelector('.run-button');
+                const collapseButton = editorElement.querySelector('.collapse-button');
+                const codeBody = editorElement.querySelector('.code-runner-body');
+                const resetButton = editorElement.querySelector('.reset-button');
+                
+                if (!textarea || !outputElement || !runButton) {
+                    console.error(`编辑器元素缺失: textarea=${!!textarea}, output=${!!outputElement}, runButton=${!!runButton}`);
+                    return;
+                }
+                
+                // 保存原始代码
+                const originalCode = textarea.value;
+                console.log(`编辑器 ${index + 1} 原始代码:`, originalCode);
+                
+                // 初始化 CodeMirror
+                try {
+                    const editor = CodeMirror.fromTextArea(textarea, {
+                        mode: 'python',
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        autoCloseBrackets: true,
+                        theme: 'monokai',
+                        indentUnit: 4,
+                        indentWithTabs: false
+                    });
+                    codeEditors.push(editor);
+                    console.log(`编辑器 ${index + 1} 初始化成功`);
+                    
+                    // 运行按钮点击事件
+                    runButton.addEventListener('click', async () => {
+                        const code = editor.getValue();
+                        console.log(`运行代码:`, code);
+                        outputElement.textContent = '';
+                        await runCode(code, outputElement);
+                    });
+                    
+                    // 重置按钮点击事件
+                    if (resetButton) {
+                        resetButton.addEventListener('click', () => {
+                            console.log(`重置编辑器 ${index + 1}`);
+                            editor.setValue(originalCode);
+                            outputElement.textContent = '';
+                        });
+                    }
+                    
+                    // 折叠按钮点击事件
+                    if (collapseButton) {
+                        collapseButton.addEventListener('click', () => {
+                            codeBody.classList.toggle('hidden');
+                            const icon = collapseButton.querySelector('i');
+                            if (codeBody.classList.contains('hidden')) {
+                                icon.className = 'fa fa-chevron-down';
+                            } else {
+                                icon.className = 'fa fa-chevron-up';
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error(`初始化编辑器 ${index + 1} 时出错:`, error);
+                }
+            });
+            console.log(`代码编辑器初始化完成，共 ${codeEditors.length} 个编辑器`);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log("DOMContentLoaded 事件触发");
+            try {
+                // 先初始化代码编辑器
+                initCodeEditors();
+                // 然后初始化 Pyodide
+                await initPyodide();
+                console.log("初始化过程完成");
+            } catch (error) {
+                console.error("初始化过程中发生错误:", error);
             }
         });
     </script>
